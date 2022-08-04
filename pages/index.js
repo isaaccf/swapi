@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import styles from '../styles/Index.module.css'
+import { useRouter } from 'next/router'
 
 import { getAll } from '../services/swApi'
-import ListItem from '../components/ListItem'
+import Header from '../components/Header'
+import CharacterList from '../components/CharacterList'
+
+import styles from '../styles/Index.module.css'
 
 export default function Home() {
   const [characters, setCharacters] = useState([])
   const [nextPage, setNextPage] = useState('')
+  const [search, setSearch] = useState('')
+  const router = useRouter()
 
   const updateNextPage = (nextPage) => {
     const nextPageNumber = nextPage?.match(/(?:=)([0-9]+)/)
@@ -20,6 +25,13 @@ export default function Home() {
     })
   }, [])
 
+  useEffect(() => {
+    if (search === '') return 
+
+    console.log('search', search)
+    router.push(`/search?term=${search}`)
+  }, [search])
+
   const handleNextPage = (e) => {
     e.preventDefault();
     getAll(nextPage).then(response => {
@@ -30,14 +42,8 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      <h1 className={styles.h1}>Star Wars API</h1>
-      <div className={styles.container}>
-        {
-          characters?.map(character => {
-            return <ListItem key={character.name} element={character} />
-          })
-        }
-      </div>
+      <Header updateSearch={setSearch}/>
+      <CharacterList characters={characters} />
       {
         nextPage !== '' ? <button className={styles.loadMore} onClick={handleNextPage}>Load more...</button> : ''
       }

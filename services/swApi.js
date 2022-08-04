@@ -31,3 +31,13 @@ export const getFilmDetails = async (url) => {
     throw new Error('Imposible get data')
   }
 }
+
+export const getSearchData = async (searchTerm) => {
+  try {
+    const response = await fetch(`${process.env.API_BASE_URL}/people/?search=${searchTerm}`)
+    return await response.json()
+  } catch (e) {
+    console.error('Imposible get data', e)
+    throw new Error('Imposible get data')
+  }
+}

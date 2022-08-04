@@ -5,17 +5,6 @@
   text-align: center;
 }
 
-.h1 {
-  text-align: start;
-}
-
-.container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1rem;
-  grid-auto-rows: minmax(100px, auto);
-}
-
 .main {
   min-height: 100vh;
   padding: 4rem 0;
