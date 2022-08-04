@@ -1,0 +1,25 @@
+.itemList {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  border: 1px solid;
+  padding: .5em;
+  cursor: pointer;
+}
+
+.itemName {
+  font-size: 1.3em;
+  text-align: center;
+  padding-bottom: 1em;
+  width: 100%;
+}
+
+.itemBirth {
+  width: 50%;
+  text-align: center;
+}
+
+.itemFilms {
+  width: 50%;
+  text-align: center;
+}

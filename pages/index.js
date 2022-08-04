@@ -29,18 +29,18 @@ export default function Home() {
   }
 
   return (
-    <div>
-      <h1>Star Wars API</h1>
+    <div className={styles.page}>
+      <h1 className={styles.h1}>Star Wars API</h1>
       <div className={styles.container}>
         {
           characters?.map(character => {
             return <ListItem key={character.name} element={character} />
           })
         }
-        {
-          nextPage !== '' ? <button onClick={handleNextPage}>Load more...</button> : ''
-        }
       </div>
+      {
+        nextPage !== '' ? <button className={styles.loadMore} onClick={handleNextPage}>Load more...</button> : ''
+      }
     </div>
   )
 }
