@@ -1,0 +1,43 @@
+.navigateBack {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.characterName {
+  font-size: 2em;
+  line-height: 1.5em;
+  margin: .5em 0;
+}
+
+.characterData {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 1em;
+}
+
+.filmsTitle {
+  font-size: 1.4em;
+}
+
+.films ul {
+  line-height: 1.8em;
+}
+
+.films ul li {
+  list-style: none;
+}
+
+@media (max-width: 600px) {
+  .backText {
+    display: none;
+  }
+
+  .characterData {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
