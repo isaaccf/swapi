@@ -34,14 +34,24 @@ const Character = () => {
     })
   }, [characterId])
 
+  const returningPage = () => {
+    let searchSaved = sessionStorage.getItem('search')
+    if (searchSaved === null || searchSaved === '') {
+      return '/'
+    }
+    else {
+      return `/search?term=${searchSaved}`
+    }
+  }
+
   if (loading || !characterData) return <div className="page"><Loader /></div>
 
   return (
     <div className="page">
-      <Link href="/">
+      <Link href={returningPage()}>
         <span className={styles.navigateBack}>
           <span>&larr; </span>
-          <span className={styles.backText}>back to main list</span>
+          <span className={styles.backText}>back to {returningPage() === '/' ? 'main' : 'search'} list</span>
         </span>
       </Link>
       <div className={styles.characterName}>{characterData?.name}</div>

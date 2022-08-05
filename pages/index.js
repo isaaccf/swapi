@@ -21,6 +21,7 @@ export default function Home() {
   }
 
   useEffect(() => {
+    sessionStorage.removeItem('search')
     getAll().then(response => {
       setLoading(false)
       setCharacters(response.results)

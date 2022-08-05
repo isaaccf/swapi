@@ -3,8 +3,6 @@ import userEvent from '@testing-library/user-event'
 import Searcher from './index'
 import nextRouter from 'next/router';
 
-
-
 describe('searcher test', () => {
   beforeAll(() => {
     nextRouter.useRouter = jest.fn();

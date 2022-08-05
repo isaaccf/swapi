@@ -19,6 +19,7 @@ export default function Search() {
     if (!router.query.term || router.query.term === '') return 
 
     setSearch(router.query.term)
+    sessionStorage.setItem('search', router.query.term)
     getSearchData(router.query.term).then(result => {
       setLoading(false)
       setCharacters(result.results)
