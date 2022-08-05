@@ -4,20 +4,17 @@ import PropTypes from "prop-types"
 
 import styles from './style.module.css'
 
-const Searcher = ({ updateSearch, showClearButton }) => {
+const Searcher = ({ updateSearch, showClearButton}) => {
   const [search, setSearch] = useState('')
   const router = useRouter()
 
   useEffect(() => {
-    setSearch(sessionStorage.getItem('searchValue') || '')
-    if (sessionStorage.getItem('searchValue') && sessionStorage.getItem('searchValue') !== '') {
-      updateSearch(sessionStorage.getItem('searchValue'))
-    }
-  }, []);
+    console.log(sessionStorage.getItem('searchValue'))
+    setSearch(sessionStorage.getItem('searchValue') || '')
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    sessionStorage.setItem('searchValue', search)
     updateSearch(search)
   } 
 
@@ -36,7 +33,7 @@ const Searcher = ({ updateSearch, showClearButton }) => {
       <form className={styles.searchFrom} onSubmit={handleSubmit}>
         <input className={styles.search} style={showClearButton &&  { width: 'calc(100% - 100px)' }} type="text" placeholder="Search..." onChange={handleChange} value={search} />
         <button className={styles.button} onClick={handleSubmit}>🔎</button>
-        { showClearButton ? <button className={styles.button} onClick={clearSearch}>✖️</button> : '' }
+        { showClearButton ? <button className={`${styles.button} ${styles.clearButton}`} onClick={clearSearch}>✖️</button> : '' }
       </form>
     </>
   )
@@ -44,7 +41,8 @@ const Searcher = ({ updateSearch, showClearButton }) => {
 
 Searcher.propTypes = {
   updateSearch: PropTypes.func.isRequired,
-  showClearButton: PropTypes.bool
+  showClearButton: PropTypes.bool,
+  searchValue: PropTypes.string
 };
 
 export default Searcher

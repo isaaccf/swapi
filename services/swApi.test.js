@@ -1,7 +1,8 @@
-import { getAll } from './swApi'
+import { getAll, getSearchData } from './swApi'
 
 import page1 from '../cypress/fixtures/people/page1.json'
 import page9 from '../cypress/fixtures/people/page9.json'
+import lukeSearchResults  from '../cypress/fixtures/people/lukeSearchResults.json'
 
 global.fetch = jest.fn();
 
@@ -32,5 +33,17 @@ describe('Star Wars API test', () => {
     const result = await getAll(9)
     expect(global.fetch).toHaveBeenCalledWith(`${process.env.API_BASE_URL}/people?page=9`)
     expect(result.results).not.toHaveLength(10)
+  })
+
+  test('should return 1 record on search ', async () => {
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        json: () => Promise.resolve(lukeSearchResults),
+      })
+    );
+
+    const result = await getSearchData('luke')
+    expect(global.fetch).toHaveBeenCalledWith(`${process.env.API_BASE_URL}/people/?search=luke`)
+    expect(result.results).toHaveLength(1)
   })
 })

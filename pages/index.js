@@ -6,11 +6,13 @@ import Header from '../components/Header'
 import CharacterList from '../components/CharacterList'
 
 import styles from '../styles/Index.module.css'
+import Loader from '../components/Loader'
 
 export default function Home() {
   const [characters, setCharacters] = useState([])
   const [nextPage, setNextPage] = useState('')
   const [search, setSearch] = useState('')
+  const [loading, setLoading] = useState(true)
   const router = useRouter()
 
   const updateNextPage = (nextPage) => {
@@ -19,7 +21,9 @@ export default function Home() {
   }
 
   useEffect(() => {
+    console.log('index')
     getAll().then(response => {
+      setLoading(false)
       setCharacters(response.results)
       updateNextPage(response.next)
     })
@@ -42,8 +46,10 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      <Header updateSearch={setSearch}/>
-      <CharacterList characters={characters} />
+      <Header updateSearch={setSearch} />
+      {
+        loading || !characters ? <div className="page"><Loader /></div> : <CharacterList characters={characters} />
+      }
       {
         nextPage !== '' ? <button className={styles.loadMore} onClick={handleNextPage}>Load more...</button> : ''
       }

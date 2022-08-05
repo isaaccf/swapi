@@ -6,6 +6,7 @@ import { getCharacterDetail, getFilmDetails } from "../../services/swApi";
 import { getDateTimeFromDate } from "../../services/utils";
 
 import styles from '../../styles/Character.module.css'
+import Loader from "../../components/Loader";
 
 const Character = () => {
   const router = useRouter()
@@ -33,7 +34,7 @@ const Character = () => {
     })
   }, [characterId])
 
-  if (loading || !characterData) return <div className="loading">loading</div>
+  if (loading || !characterData) return <div className="page"><Loader /></div>
 
   return (
     <div className="page">
