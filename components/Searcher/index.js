@@ -31,9 +31,9 @@ const Searcher = ({ updateSearch, showClearButton}) => {
 
   return (
     <>
-      <form className={styles.searchFrom} onSubmit={handleSubmit}>
-        <input className={styles.search} style={showClearButton &&  { width: 'calc(100% - 100px)' }} type="text" placeholder="Search..." onChange={handleChange} value={search} />
-        <button className={styles.button} onClick={handleSubmit}>🔎</button>
+      <form className={styles.searchForm} onSubmit={handleSubmit}>
+        <input className={styles.search} type="text" placeholder="Search..." onChange={handleChange} value={search} />
+        <button className={`${styles.button} ${styles.searchButton}`} onClick={handleSubmit}>🔎</button>
         { showClearButton ? <button className={`${styles.button} ${styles.clearButton}`} onClick={clearSearch}>✖️</button> : '' }
       </form>
     </>
