@@ -21,7 +21,6 @@ export default function Home() {
   }
 
   useEffect(() => {
-    console.log('index')
     getAll().then(response => {
       setLoading(false)
       setCharacters(response.results)
@@ -32,7 +31,6 @@ export default function Home() {
   useEffect(() => {
     if (search === '') return 
 
-    console.log('search', search)
     router.push(`/search?term=${search}`)
   }, [search])
 

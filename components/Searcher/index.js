@@ -9,9 +9,10 @@ const Searcher = ({ updateSearch, showClearButton}) => {
   const router = useRouter()
 
   useEffect(() => {
-    console.log(sessionStorage.getItem('searchValue'))
-    setSearch(sessionStorage.getItem('searchValue') || '')
-  }, [])
+    if (!router.query.term || router.query.term === '') return 
+
+    setSearch(router.query.term)
+  }, [router.query.term])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -24,7 +25,7 @@ const Searcher = ({ updateSearch, showClearButton}) => {
 
   const clearSearch = (e) => {
     e.preventDefault()
-    sessionStorage.removeItem('searchValue')
+    setSearch('')
     router.push('/')
   }
 
@@ -41,8 +42,7 @@ const Searcher = ({ updateSearch, showClearButton}) => {
 
 Searcher.propTypes = {
   updateSearch: PropTypes.func.isRequired,
-  showClearButton: PropTypes.bool,
-  searchValue: PropTypes.string
+  showClearButton: PropTypes.bool
 };
 
 export default Searcher

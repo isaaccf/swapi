@@ -1,8 +1,16 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Searcher from './index'
+import nextRouter from 'next/router';
+
+
 
 describe('searcher test', () => {
+  beforeAll(() => {
+    nextRouter.useRouter = jest.fn();
+    nextRouter.useRouter.mockImplementation(() => ({ query: {} }));
+  })
+
   it('should create the component', () => {
     const submitHandler = jest.fn()
 
