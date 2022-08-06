@@ -5,7 +5,6 @@ import { getAll } from '../services/swApi'
 import Header from '../components/Header'
 import CharacterList from '../components/CharacterList'
 
-import styles from '../styles/Index.module.css'
 import Loader from '../components/Loader'
 
 export default function Home() {
@@ -37,20 +36,21 @@ export default function Home() {
 
   const handleNextPage = (e) => {
     e.preventDefault();
+    setLoading(true)
     getAll(nextPage).then(response => {
       setCharacters(current => [...current, ...response.results])
       updateNextPage(response.next)
+      setLoading(false)
     })
   }
 
   return (
-    <div className={styles.page}>
+    <div className='page'>
       <Header updateSearch={setSearch} />
+      <CharacterList characters={characters} />
+      { loading && <Loader /> }
       {
-        loading || !characters ? <div className="page"><Loader /></div> : <CharacterList characters={characters} />
-      }
-      {
-        nextPage !== '' ? <button className={styles.loadMore} onClick={handleNextPage}>Load more...</button> : ''
+        nextPage !== '' ? <button className='loadMore' onClick={handleNextPage}>Load more...</button> : ''
       }
     </div>
   )

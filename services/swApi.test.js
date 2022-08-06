@@ -43,7 +43,7 @@ describe('Star Wars API test', () => {
     );
 
     const result = await getSearchData('luke')
-    expect(global.fetch).toHaveBeenCalledWith(`${process.env.API_BASE_URL}/people/?search=luke`)
+    expect(global.fetch).toHaveBeenCalledWith(`${process.env.API_BASE_URL}/people/?search=luke&page=1`)
     expect(result.results).toHaveLength(1)
   })
 })

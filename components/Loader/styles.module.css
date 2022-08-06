@@ -53,3 +53,9 @@
     transform: scale(1.0); 
   } 
 }
+
+@media (prefers-color-scheme: light) {
+  .skChaseDot:before {
+    background-color: #333333;
+  }
+}

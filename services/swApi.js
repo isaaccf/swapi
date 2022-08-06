@@ -32,9 +32,9 @@ export const getFilmDetails = async (url) => {
   }
 }
 
-export const getSearchData = async (searchTerm) => {
+export const getSearchData = async (searchTerm, page = 1) => {
   try {
-    const response = await fetch(`${process.env.API_BASE_URL}/people/?search=${searchTerm}`)
+    const response = await fetch(`${process.env.API_BASE_URL}/people/?search=${searchTerm}&page=${page}`)
     return await response.json()
   } catch (e) {
     console.error('Imposible get data', e)

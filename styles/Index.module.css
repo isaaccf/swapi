@@ -1,26 +1,6 @@
-.page {
-  margin: 0 auto;
-  width: 80%;
-  padding-bottom: 3em;
-  text-align: center;
-}
-
 .main {
   min-height: 100vh;
   padding: 4rem 0;
-}
-
-.loadMore {
-  margin-top: 2em;
-  background-color: #FAFBFC;
-  border: 1px solid rgba(27, 31, 35, 0.15);
-  border-radius: 6px;
-  color: #24292E;
-  cursor: pointer;
-  line-height: 20px;
-  padding: 6px 16px;
-  position: relative;
-  vertical-align: middle;
 }
 
 @media (max-width: 600px) {
@@ -30,18 +10,5 @@
     grid-template-columns: 1fr;
     grid-gap: 1rem;
     grid-auto-rows: minmax(100px, auto);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .card,
-  .footer {
-    border-color: #222;
-  }
-  .code {
-    background: #111;
-  }
-  .logo img {
-    filter: invert(1);
   }
 }

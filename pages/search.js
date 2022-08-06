@@ -8,8 +8,14 @@ import Loader from '../components/Loader'
 export default function Search() {
   const router = useRouter()
   const [search, setSearch] = useState('')
+  const [nextPage, setNextPage] = useState('')
   const [loading, setLoading] = useState(true)
   const [characters, setCharacters] = useState([])
+
+  const updateNextPage = (nextPage) => {
+    const nextPageNumber = nextPage?.match(/(?:=)([0-9]+)/)
+    setNextPage(nextPageNumber && nextPageNumber[1] || '')
+  }
 
   useEffect(() => {
     setSearch('')
@@ -23,6 +29,7 @@ export default function Search() {
     getSearchData(router.query.term).then(result => {
       setLoading(false)
       setCharacters(result.results)
+      updateNextPage(result.next)
     })
   }, [router.query.term])
 
@@ -34,11 +41,23 @@ export default function Search() {
     router.push(`/search?term=${search}`, undefined, {shallow: true})
   }, [search])
 
+  const handleNextPage = (e) => {
+    e.preventDefault();
+    setLoading(true)
+    getSearchData(search, nextPage).then(response => {
+      setCharacters(current => [...current, ...response.results])
+      updateNextPage(response.next)
+      setLoading(false)
+    })
+  }
+
   return (
     <div className="page">
       <Header updateSearch={setSearch} showClearButton={true} />
+      <CharacterList characters={characters} />
+      { loading && <Loader /> }
       {
-        loading || !characters ? <div className="page"><Loader /></div> : <CharacterList characters={characters} />
+        nextPage !== '' ? <button className='loadMore' onClick={handleNextPage}>Load more...</button> : ''
       }
     </div>
   )
