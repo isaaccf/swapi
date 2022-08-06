@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 import { getAll } from '../services/swApi'
 import Header from '../components/Header'
@@ -46,6 +47,9 @@ export default function Home() {
 
   return (
     <div className='page'>
+      <Head>
+        <title>SWAPI</title>
+      </Head>
       <Header updateSearch={setSearch} />
       <CharacterList characters={characters} />
       { loading && <Loader /> }

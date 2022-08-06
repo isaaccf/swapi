@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
+
 import { getSearchData } from '../services/swApi'
 import CharacterList from '../components/CharacterList'
 import Header from '../components/Header'
@@ -53,6 +55,9 @@ export default function Search() {
 
   return (
     <div className="page">
+      <Head>
+        <title>SWAPI</title>
+      </Head>
       <Header updateSearch={setSearch} showClearButton={true} />
       <CharacterList characters={characters} />
       { loading && <Loader /> }

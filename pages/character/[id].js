@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
+import Head from 'next/head'
 import Link from "next/link";
 
 import { getCharacterDetail, getFilmDetails } from "../../services/swApi";
@@ -48,11 +49,14 @@ const Character = () => {
 
   return (
     <div className="page">
+      <Head>
+        <title>SWAPI</title>
+      </Head>
       <Link href={returningPage()}>
-        <span className={styles.navigateBack}>
+        <div className={styles.navigateBack}>
           <span>&larr; </span>
           <span className={styles.backText}>back to {returningPage() === '/' ? 'main' : 'search'} list</span>
-        </span>
+        </div>
       </Link>
       <div className={styles.characterName}>{characterData?.name}</div>
       <div className={styles.characterData}>
