@@ -24,6 +24,10 @@
   padding: 1em;
 }
 
+.films {
+  text-align: left;
+}
+
 .filmsTitle {
   font-size: 1.4em;
 }
