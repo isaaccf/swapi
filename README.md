@@ -1,32 +1,40 @@
+# SWAPI
+
+This project is a webapp that shows Stars Wars characters from [SWAPI](https://swapi.dev).
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Local run
 
-First, run the development server:
+To run the project locally, follow the next steps
 
 ```bash
+yarn install
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+If you want to check if the test are ok, you can run the following commands
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- `yarn test` to execute unit tests.
+- `yarn cypress` to open Cypress and see the execution of e2e/integration tests.
+- `yarn e2e` to execute e2e/integration tests in CI mode, showing results in terminal and creating videos and screenshots.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Deploy
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+This project is deployed in Vercel. The URL is [https://swapi-isaaccf.vercel.app/](https://swapi-isaaccf.vercel.app/).
 
-## Learn More
+## Used packages
 
-To learn more about Next.js, take a look at the following resources:
+I decided to use [Luxon](https://moment.github.io/luxon/#/) to manage dates and time calculation.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+In the requirements there is a single calculation, get how many years ago each film was published. This could be done with a simple method developed in the project, but the time to develop that method probably will be unuseful when another requirement comes, like get the last edition of the information. I think to have a date management library is useful, even if in this case could be done in other way.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## New features
 
-## Deploy on Vercel
+Without a specific order, following I writed a few new features or improvements to the code:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- If you're inside a character details, when you go back, if there were more pages loaded in search or index page, because you used the "Loade more" button several times, you will only get the first one. This could be solved using some state management, like Redux, saving the pages loaded before navigate to details, and when the user comes back to index or seach page, get the pages from the state.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- The application can show more information, maybe a Link in each film to show all the details.
+
+- The pagination could be done in other several ways. One of them could be create a traditional paginator, with the number os pages, based on the total records getted from the API and the records showed in each page. Another way could be to create an infinite scroll, calculating how many cards can be placed in the screen, get all the pages that we need to fill all the cards and get one more page when the user reach the final of the page.
